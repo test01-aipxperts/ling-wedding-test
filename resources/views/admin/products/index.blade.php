@@ -8,8 +8,8 @@
                 <div class="card-header">Products <a href="{{route('admin.products.create')}}" class="btn btn-primary align-items-right">Create New</a></div>
 
                 <div class="card-body">
-                   @if (session('success'))
-                   <div class="alert alert-success" role="alert">
+                 @if (session('success'))
+                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -58,6 +58,13 @@
             @endforeach
 
         </tbody>
+        @if($products->count() > 0)
+        <tfoot>
+            <tr>
+                <td colspan="3" class="mt-2">{{$products->render()}}</td>
+            </tr>
+        </tfoot>
+        @endif
     </table>
 
 </div>
