@@ -1,0 +1,17 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/storage/logs
+/vendor
+/public/uploads/*
+/public/customer/wallet_proof
+/public/apidoc
+.env
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+composer.lock
+.htaccess
