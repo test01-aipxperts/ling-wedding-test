@@ -51,4 +51,18 @@ class LoginController extends Controller
         return $request->only($this->username(), 'password','is_admin');
     }
 
+    public function logout(Request $request)
+    {
+        $user = $this->guard()->user();
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        if($user->is_admin){
+            return redirect('/admin/login');
+        }
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
 }
