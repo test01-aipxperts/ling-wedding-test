@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$A/FI6UtgRrNL2gvq5s4nOejRdOFgA.ttIc0u9iZIy97ZMxozFY0zO', // aipX@1234
             'remember_token' => Str::random(10),
+            'is_admin' => 1
         ]);
 
     }
