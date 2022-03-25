@@ -27,4 +27,7 @@ Route::get('/home', 'HomeController@index')->middleware('verified')->name('home'
 
 Route::get('/admin/login', 'Admin\Auth\LoginController@showLoginForm')->name('admin-login-view');
 Route::post('/admin/login', 'Admin\Auth\LoginController@login')->name('admin-login');
-Route::get('/admin', 'HomeController@index')->middleware('verified')->name('admin.dashboard');
+Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
+    Route::resource('products', 'Admin\ProductController');
+});
