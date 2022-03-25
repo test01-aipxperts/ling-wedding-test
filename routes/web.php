@@ -21,13 +21,15 @@ Auth::routes(['verify' => true]);
 Route::get('/admin',function(){
     return redirect('/admin/login');
 });
-Route::get('/home', 'HomeController@index')->middleware('verified')->name('home');
-
-
+Route::middleware(['auth', 'verified','authorized:user'])->group(function () {
+    Route::get('/home', 'ProductController@index')->name('home');
+    Route::any('/pick/{id}', 'ProductController@pick')->name('product.pick');
+    Route::delete('/removepick/{id}', 'ProductController@removepick')->name('product.removepick');
+});
 
 Route::get('/admin/login', 'Admin\Auth\LoginController@showLoginForm')->name('admin-login-view');
 Route::post('/admin/login', 'Admin\Auth\LoginController@login')->name('admin-login');
-Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'verified','authorized:admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
     Route::resource('products', 'Admin\ProductController');
 });
